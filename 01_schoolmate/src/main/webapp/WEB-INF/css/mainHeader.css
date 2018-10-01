@@ -1,0 +1,144 @@
+@CHARSET "UTF-8";
+*{
+    padding: 0px;
+    margin: 0px;
+
+}
+
+body{
+    background-color: #408080;
+
+
+}
+
+.back{
+    background-color: #408080;
+    width: 100%;
+    height: 80px;
+    margin: 0px auto;
+
+}
+.head{
+
+    width: 100%;
+    background-color: darkcyan;
+    height: 100px;
+    position: relative;
+
+
+}
+.headtitle{
+    float: left;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    margin-top: 30px;
+    color: azure;
+
+}
+.headlead{
+
+
+}
+#headleft {
+    margin-left: 10px;
+    margin-top: 60px;
+    list-style: none;
+    float: left;
+    padding-left: 5px;
+}
+#headright1 {
+    margin-right: 10px;
+    margin-top: 60px;
+    list-style: none;
+    float: right;
+    padding-right: 5px;
+}
+#headright2 {
+    margin-right: 10px;
+    margin-top: 60px;
+    list-style: none;
+    float: right;
+    padding-right: 5px;
+}
+.loser {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 700px;
+    width: 50%;x;
+}
+.loser div{
+	margin:40px 0 0 0;
+}
+.loser div ul li{
+	padding:20;
+	list-style:none;
+}
+li{
+    padding: 2px;
+    display: inline;
+
+}
+a:link,a{
+    color: snow;
+    text-align: center;
+    padding: 2px;
+    text-decoration: none;
+
+}
+a:hover{
+    color: black;
+}
+.headimage{
+
+    float: right;
+    margin-top: 30px;
+    margin-right: 5px;
+
+
+
+}
+.headimage  img{
+    height: 60px;
+    width: 60px;
+}
+.headform form{
+    float: right;
+    height: 26px;
+    margin-right: 50px;
+}
+
+form input{
+    height: 20px;
+    background-color: cadetblue ;
+    width: 100px;
+    margin-top: 50px;
+    border-radius: 30px;
+
+}
+.foot{
+    text-align: center;
+    background-color: lightgray;
+    height: 50px;
+    padding: 20px;
+    font-size: 30px;
+    color: darkslategrey;
+
+}
+.bdy{
+    margin: 20px 10px;
+
+
+
+}
+.bdytitle{
+    color: snow;
+
+}
+.bdytitle p{
+    margin: 20px;
+
+}

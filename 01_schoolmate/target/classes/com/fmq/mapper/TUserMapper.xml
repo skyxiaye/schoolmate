@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fmq.dao.TUserMapper" >
+  <resultMap id="BaseResultMap" type="com.fmq.pojo.TUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="CHAR" />
+    <result column="user_password" property="userPassword" jdbcType="CHAR" />
+    <result column="user_major" property="userMajor" jdbcType="CHAR" />
+    <result column="user_garde" property="userGarde" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_name, user_password, user_major, user_garde
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fmq.pojo.TUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <!-- 根据用户名查询用户 -->
+  <select id="findUserByUserName" resultType="TUser" parameterType="java.lang.String">
+   select *from t_user where user_name = #{userName,jdbcType=CHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fmq.pojo.TUserExample" >
+    delete from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fmq.pojo.TUser" >
+    insert into t_user (id, user_name, user_password, 
+      user_major, user_garde)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=CHAR}, #{userPassword,jdbcType=CHAR}, 
+      #{userMajor,jdbcType=CHAR}, #{userGarde,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fmq.pojo.TUser" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userMajor != null" >
+        user_major,
+      </if>
+      <if test="userGarde != null" >
+        user_garde,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=CHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=CHAR},
+      </if>
+      <if test="userMajor != null" >
+        #{userMajor,jdbcType=CHAR},
+      </if>
+      <if test="userGarde != null" >
+        #{userGarde,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fmq.pojo.TUserExample" resultType="java.lang.Integer" >
+    select count(*) from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=CHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=CHAR},
+      </if>
+      <if test="record.userMajor != null" >
+        user_major = #{record.userMajor,jdbcType=CHAR},
+      </if>
+      <if test="record.userGarde != null" >
+        user_garde = #{record.userGarde,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user
+    set id = #{record.id,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=CHAR},
+      user_password = #{record.userPassword,jdbcType=CHAR},
+      user_major = #{record.userMajor,jdbcType=CHAR},
+      user_garde = #{record.userGarde,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fmq.pojo.TUser" >
+    update t_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=CHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=CHAR},
+      </if>
+      <if test="userMajor != null" >
+        user_major = #{userMajor,jdbcType=CHAR},
+      </if>
+      <if test="userGarde != null" >
+        user_garde = #{userGarde,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fmq.pojo.TUser" >
+    update t_user
+    set user_name = #{userName,jdbcType=CHAR},
+      user_password = #{userPassword,jdbcType=CHAR},
+      user_major = #{userMajor,jdbcType=CHAR},
+      user_garde = #{userGarde,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
